@@ -1,0 +1,115 @@
+@use 'sass:math';
+
+$utilities: (
+  'padding': (
+    'prefix': 'p',
+    'values': (
+      'default': $base-padding,
+      'sm': $padding-size-sm,
+      'md': $padding-size-md,
+      'lg': $padding-size-lg,
+      'xl': $padding-size-xl,
+    ),
+  ),
+  'display': (
+    'prefix': 'd',
+    'values': (
+      'n': none,
+      'b': block,
+      'f': flex,
+      'g': grid,
+      'i': inline,
+      'i-b': inline-block,
+    ),
+  ),
+  'flex': (
+    'prefix': 'f',
+    'values': (
+      '1': 1,
+      '0-1': 0.5,
+      '2-5': 2.5,
+      '3': 3,
+    ),
+  ),
+  'text-align': (
+    'prefix': 'ta',
+    'values': (
+      'l': left,
+      'r': right,
+      'c': center,
+    ),
+  ),
+  'align-items': (
+    'prefix': 'ai',
+    'values': (
+      's': start,
+      'e': end,
+      'c': center,
+    ),
+  ),
+  'align-self': (
+    'prefix': 'as',
+    'values': (
+      'c': center,
+    ),
+  ),
+  'font-size': (
+    'prefix': 'font',
+    'values': (
+      'sm': $font-size-sm,
+      'md': $font-size-md,
+      'lg': $font-size-lg,
+      'xl': $font-size-xl,
+      'xxl': $font-size-xxl,
+    ),
+  ),
+  'background': (
+    'prefix': 'bg',
+    'values': (
+      'lightgray': $lightgray,
+    ),
+  ),
+  'text-transform': (
+    'prefix': 'tt',
+    'values': (
+      'u': uppercase,
+    ),
+  ),
+  'color': (
+    'prefix': 'cr',
+    'values': (
+      'drab': $drab,
+      'sage': $sage,
+      'darkgray': $darkgray,
+      'slate': $slate,
+    ),
+  ),
+  'justify-content': (
+    'prefix': 'ct',
+    'values': (
+      'default': stretch,
+      's': start,
+      'e': end,
+      'c': center,
+      'sb': space-between,
+    ),
+  ),
+);
+
+// generate utility classes
+@each $property, $map in $utilities {
+  $prefix: map-get($map, 'prefix');
+  $values: map-get($map, 'values');
+
+  @each $k, $v in $values {
+    @if ($k == 'default') {
+      .#{$prefix} {
+        #{$property}: $v;
+      }
+    } @else {
+      .#{$prefix}-#{$k} {
+        #{$property}: $v;
+      }
+    }
+  }
+}
